@@ -3,6 +3,7 @@ using Source.Codebase.Domain.Models;
 using Source.Codebase.Presentation;
 using Source.Codebase.Services;
 using System;
+using UnityEngine;
 
 namespace Source.Codebase.Controllers.Presenters
 {
@@ -40,7 +41,7 @@ namespace Source.Codebase.Controllers.Presenters
 
         private void OnClickCountUpdated(int clickCount)
         {
-            float value = clickCount / _levelProgressBar.NeedClickPerNextLevel;
+            float value = (float)clickCount / _levelProgressBar.NeedClickPerNextLevel;
             _view.UpdateSlider(value);
         }
     }

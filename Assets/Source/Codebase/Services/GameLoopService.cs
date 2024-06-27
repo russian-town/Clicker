@@ -7,8 +7,6 @@ namespace Source.Codebase.Services
         public event Action<int> Clicked;
 
         public void HandleClick(int clickForce)
-        {
-            Clicked?.Invoke(clickForce);
-        }
+            => Clicked?.Invoke(clickForce);
     }
 }

@@ -7,5 +7,8 @@ namespace Source.Codebase.Domain.Configs
     public class GameConfig : ScriptableObject
     {
         [field: SerializeField] public ClickEffectView ClickEffectViewTemplate { get; private set; }
+        [field: SerializeField] public LevelView LevelViewTemplate { get; private set; }
+        [field: SerializeField] public LevelProgressBarView LevelProgressBarViewTemplate { get; private set; }
+        [field: SerializeField] public ClickHandlerView ClickHandlerViewTemplate { get; private set; }
     }
 }

@@ -5,12 +5,7 @@ namespace Source.Codebase.Domain.Models
 {
     public class ClickHandler : IDataReader
     {
-        public ClickHandler(int clickForce)
-        {
-            ClickForce = clickForce;
-        }
-
-        public int ClickForce { get; private set; }
+        public int ClickForce { get; private set; } = 1;
 
         public void Read(PlayerData playerData)
         {

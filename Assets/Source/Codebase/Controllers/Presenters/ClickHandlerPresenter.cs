@@ -11,13 +11,18 @@ namespace Source.Codebase.Controllers.Presenters
         private readonly ClickHandler _clickHandler;
         private readonly ClickHandlerView _view;
         private readonly ClickEffectFactory _effectFactory;
+        private readonly GameLoopService _gameLoopService;
 
         public ClickHandlerPresenter(
             ClickHandler clickHandler,
-            ClickHandlerView clickHandlerView)
+            ClickHandlerView clickHandlerView,
+            ClickEffectFactory effectFactory,
+            GameLoopService gameLoopService)
         {
             _clickHandler = clickHandler;
             _view = clickHandlerView;
+            _effectFactory = effectFactory;
+            _gameLoopService = gameLoopService;
         }
 
         public void Enable()
@@ -32,7 +37,8 @@ namespace Source.Codebase.Controllers.Presenters
 
         private void OnClicked(Vector2 position)
         {
-            _effectFactory.Create(1, position);
+            _effectFactory.Create(_clickHandler.ClickForce, position);
+            _gameLoopService.HandleClick(_clickHandler.ClickForce);
         }
     }
 }
