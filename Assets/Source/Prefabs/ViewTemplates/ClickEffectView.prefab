@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 3361716789610843631}
   - component: {fileID: 5734730459916567916}
   - component: {fileID: 8332300748847452894}
+  - component: {fileID: -5363537147569363605}
   m_Layer: 5
-  m_Name: Score
+  m_Name: ClickEffectView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -135,3 +136,15 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &-5363537147569363605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7308969112924811950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34c4d0b6643919142a29abdc79701dac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

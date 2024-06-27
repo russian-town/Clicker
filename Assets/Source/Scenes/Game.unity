@@ -177,7 +177,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_EffectColor: {r: 0, g: 0.304816, b: 0.5754717, a: 1}
-  m_EffectDistance: {x: 1, y: -13.8}
+  m_EffectDistance: {x: 0, y: -13.8}
   m_UseGraphicAlpha: 1
 --- !u!114 &119889595
 MonoBehaviour:
@@ -672,6 +672,7 @@ GameObject:
   m_Component:
   - component: {fileID: 530584568}
   - component: {fileID: 530584569}
+  - component: {fileID: 530584570}
   m_Layer: 5
   m_Name: LevelProgressBar
   m_TagString: Untagged
@@ -752,6 +753,19 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &530584570
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 530584567}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d401ee99eb169d49afca8c5a904bf94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _slider: {fileID: 0}
 --- !u!1 &534444108
 GameObject:
   m_ObjectHideFlags: 0
@@ -821,7 +835,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 0.57
+  m_PixelsPerUnitMultiplier: 0.6
 --- !u!222 &534444111
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -966,7 +980,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_EffectColor: {r: 0, g: 0.304816, b: 0.5754717, a: 1}
-  m_EffectDistance: {x: 1, y: -13.8}
+  m_EffectDistance: {x: 0, y: -13.8}
   m_UseGraphicAlpha: 1
 --- !u!1 &762779063
 GameObject:
@@ -1194,7 +1208,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_EffectColor: {r: 0, g: 0.304816, b: 0.5754717, a: 1}
-  m_EffectDistance: {x: 1, y: -13.8}
+  m_EffectDistance: {x: 0, y: -13.8}
   m_UseGraphicAlpha: 1
 --- !u!114 &1435422736
 MonoBehaviour:
@@ -1289,8 +1303,9 @@ GameObject:
   - component: {fileID: 1559410629}
   - component: {fileID: 1559410631}
   - component: {fileID: 1559410630}
+  - component: {fileID: 1559410632}
   m_Layer: 5
-  m_Name: TouchHandler
+  m_Name: ClickHandlerView
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1354,6 +1369,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1559410628}
   m_CullTransparentMesh: 1
+--- !u!114 &1559410632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1559410628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64c36e25e99cc8048bf9d6d3368d63aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1684724947
 GameObject:
   m_ObjectHideFlags: 0
