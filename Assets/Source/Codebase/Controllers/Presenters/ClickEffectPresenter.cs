@@ -24,10 +24,9 @@ namespace Source.Codebase.Controllers.Presenters
         {
             string text = $"+ {_clickForce}";
             _clickEffectView.SetText(text);
+            _clickEffectView.PlayAnimation();
         }
 
-        public void Disable()
-        {
-        }
+        public void Disable() { }
     }
 }

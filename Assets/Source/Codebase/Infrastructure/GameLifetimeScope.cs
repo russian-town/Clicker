@@ -1,5 +1,6 @@
 using Source.Codebase.Domain.Configs;
 using Source.Codebase.Infrastructure;
+using Source.Codebase.Infrastructure.Pool;
 using Source.Codebase.Services;
 using UnityEngine;
 using VContainer;
@@ -21,6 +22,7 @@ public class GameLifetimeScope : LifetimeScope
         canvas.worldCamera = camera;
         var levelInfo = Instantiate(_levelInfoTemplate, canvas.transform);
         builder.RegisterInstance(_gameConfig);
+        builder.Register<Pool>(Lifetime.Transient).AsImplementedInterfaces().AsSelf();
         builder.Register<StaticDataService>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
         builder.Register<GameLoopService>(Lifetime.Singleton);
         builder.Register<ClickHandlerFactory>(Lifetime.Singleton).WithParameter(canvas.transform);

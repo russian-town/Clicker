@@ -2,8 +2,8 @@ using System;
 using System.Collections.Generic;
 using Source.Codebase.Domain.Configs;
 using Source.Codebase.Presentation;
-using Source.Codebase.Presentation.Abstract;
 using Source.Codebase.Services.Abstract;
+using UnityEngine;
 
 namespace Source.Codebase.Services
 {
@@ -20,7 +20,7 @@ namespace Source.Codebase.Services
             _viewTemplateByType.Add(typeof(ClickEffectView), gameConfig.ClickEffectViewTemplate);
         }
 
-        public T GetViewTemplate<T>() where T : ViewBase
+        public T GetViewTemplate<T>() where T : MonoBehaviour
         {
             if (_viewTemplateByType.TryGetValue(typeof(T), out object viewTemplate))
                 return viewTemplate as T;
