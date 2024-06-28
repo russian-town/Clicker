@@ -12,17 +12,20 @@ namespace Source.Codebase.Controllers.Presenters
         private readonly ClickHandlerView _view;
         private readonly ClickEffectFactory _effectFactory;
         private readonly GameLoopService _gameLoopService;
+        private readonly Camera _camera;
 
         public ClickHandlerPresenter(
             ClickHandler clickHandler,
             ClickHandlerView clickHandlerView,
             ClickEffectFactory effectFactory,
-            GameLoopService gameLoopService)
+            GameLoopService gameLoopService,
+            Camera camera)
         {
             _clickHandler = clickHandler;
             _view = clickHandlerView;
             _effectFactory = effectFactory;
             _gameLoopService = gameLoopService;
+            _camera = camera;
         }
 
         public void Enable()
@@ -35,9 +38,10 @@ namespace Source.Codebase.Controllers.Presenters
             _view.Clicked -= OnClicked;
         }
 
-        private void OnClicked(Vector2 position)
+        private void OnClicked(Vector2 screenPosition)
         {
-            _effectFactory.Create(_clickHandler.ClickForce, position);
+            Vector2 worldPosition = _camera.ScreenToWorldPoint(screenPosition);
+            _effectFactory.Create(_clickHandler.ClickForce, worldPosition);
             _gameLoopService.HandleClick(_clickHandler.ClickForce);
         }
     }

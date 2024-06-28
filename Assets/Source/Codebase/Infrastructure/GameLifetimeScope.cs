@@ -8,18 +8,25 @@ using VContainer.Unity;
 public class GameLifetimeScope : LifetimeScope
 {
     [SerializeField] private GameConfig _gameConfig;
-    [SerializeField] private Transform _levelInfo;
-    [SerializeField] private Transform _canvas;
+    [SerializeField] private Canvas _canvasTemplate;
+    [SerializeField] private Camera _cameraTemplate;
+    [SerializeField] private Transform _levelInfoTemplate;
 
     protected override void Configure(IContainerBuilder builder)
     {
+        var camera = Instantiate(_cameraTemplate);
+        builder.RegisterComponent(camera);
+        var canvas = Instantiate(_canvasTemplate);
+        builder.RegisterComponent(canvas);
+        canvas.worldCamera = camera;
+        var levelInfo = Instantiate(_levelInfoTemplate, canvas.transform);
         builder.RegisterInstance(_gameConfig);
         builder.Register<StaticDataService>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
         builder.Register<GameLoopService>(Lifetime.Singleton);
-        builder.Register<ClickHandlerFactory>(Lifetime.Singleton).WithParameter(_canvas);
-        builder.Register<ClickEffectFactory>(Lifetime.Singleton).WithParameter(_canvas);
-        builder.Register<LevelProgressBarFactory>(Lifetime.Singleton).WithParameter(_levelInfo);
-        builder.Register<LevelFactory>(Lifetime.Singleton).WithParameter(_levelInfo);
+        builder.Register<ClickHandlerFactory>(Lifetime.Singleton).WithParameter(canvas.transform);
+        builder.Register<ClickEffectFactory>(Lifetime.Singleton).WithParameter(canvas.transform);
+        builder.Register<LevelProgressBarFactory>(Lifetime.Singleton).WithParameter(levelInfo);
+        builder.Register<LevelFactory>(Lifetime.Singleton).WithParameter(levelInfo);
         builder.RegisterEntryPoint<EntryPoint>();
     }
 }

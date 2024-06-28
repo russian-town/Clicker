@@ -2,8 +2,6 @@ using Source.Codebase.Controllers.Presenters.Abstract;
 using Source.Codebase.Domain.Models;
 using Source.Codebase.Presentation;
 using Source.Codebase.Services;
-using System;
-using UnityEngine;
 
 namespace Source.Codebase.Controllers.Presenters
 {
