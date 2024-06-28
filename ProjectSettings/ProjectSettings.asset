@@ -684,7 +684,7 @@ PlayerSettings:
   webGLMemoryGeometricGrowthCap: 96
   webGLPowerPreference: 2
   scriptingDefineSymbols:
-    Android: DOTWEEN
+    Android: DOTWEEN;UNITASK_DOTWEEN_SUPPORT
     Bratwurst: DOTWEEN
     EmbeddedLinux: DOTWEEN
     GameCoreScarlett: DOTWEEN

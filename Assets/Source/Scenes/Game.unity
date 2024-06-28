@@ -157,6 +157,7 @@ MonoBehaviour:
   autoRun: 1
   autoInjectGameObjects: []
   _gameConfig: {fileID: 11400000, guid: cbe8601c628b98b46ad83e017902ed82, type: 2}
+  _clickEffectConfig: {fileID: 11400000, guid: b68ecee260509184b8f6aa5d3a9dd525, type: 2}
   _canvasTemplate: {fileID: 2123940457531588709, guid: 51010bdf015309e409f0f4e2c7fcd719, type: 3}
   _cameraTemplate: {fileID: 2023816764358013359, guid: 1d08c2fcc247f784db6598a7c5489a20, type: 3}
   _levelInfoTemplate: {fileID: 2568930453499845666, guid: 9d9c645e03d348a418588f0f7bd0105c, type: 3}

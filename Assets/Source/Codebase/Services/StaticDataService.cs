@@ -16,7 +16,6 @@ namespace Source.Codebase.Services
             _viewTemplateByType.Clear();
             _viewTemplateByType.Add(typeof(LevelView), gameConfig.LevelViewTemplate);
             _viewTemplateByType.Add(typeof(ClickHandlerView), gameConfig.ClickHandlerViewTemplate);
-            _viewTemplateByType.Add(typeof(LevelProgressBarView), gameConfig.LevelProgressBarViewTemplate);
             _viewTemplateByType.Add(typeof(ClickEffectView), gameConfig.ClickEffectViewTemplate);
         }
 

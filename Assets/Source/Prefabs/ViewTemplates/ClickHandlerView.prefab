@@ -89,3 +89,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64c36e25e99cc8048bf9d6d3368d63aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _rectTransform: {fileID: 4569435758009332224}
+  _targetScale: {x: 0.1, y: 0.1}
+  _scaleDuration: 0.35

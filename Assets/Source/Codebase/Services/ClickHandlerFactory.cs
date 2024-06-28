@@ -9,6 +9,7 @@ namespace Source.Codebase.Services
     public class ClickHandlerFactory
     {
         private readonly IStaticDataService _staticDataService;
+        private readonly ISaveLoadService _saveLoadService;
         private readonly ClickEffectFactory _clickEffectFactory;
         private readonly GameLoopService _gameLoopService;
         private readonly Transform _parent;
@@ -16,12 +17,14 @@ namespace Source.Codebase.Services
 
         public ClickHandlerFactory(
             IStaticDataService staticDataService,
+            ISaveLoadService saveLoadService,
             ClickEffectFactory clickEffectFactory,
             GameLoopService gameLoopService,
             Transform parent,
             Camera camera)
         {
             _staticDataService = staticDataService;
+            _saveLoadService = saveLoadService;
             _clickEffectFactory = clickEffectFactory;
             _gameLoopService = gameLoopService;
             _parent = parent;
@@ -31,6 +34,8 @@ namespace Source.Codebase.Services
         public void Create()
         {
             ClickHandler clickHandler = new();
+            _saveLoadService.AddIDataReader(clickHandler);
+            _saveLoadService.AddIDataWriter(clickHandler);
             ClickHandlerView template =
                 _staticDataService.GetViewTemplate<ClickHandlerView>();
             ClickHandlerView view = Object.Instantiate(template, _parent);

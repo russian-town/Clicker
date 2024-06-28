@@ -1,27 +1,35 @@
 using System.Collections.Generic;
 using Source.Codebase.Data;
 using Source.Codebase.Data.Abstract;
+using Source.Codebase.Services.Abstract;
 using UnityEngine;
 
 namespace Source.Codebase.Services
 {
-    public class SaveLoadService
+    public class SaveLoadService : ISaveLoadService
     {
         private const string Key = "Saves";
 
         private readonly List<IDataWriter> _dataWriters;
         private readonly List<IDataReader> _dataReaders;
 
-        private PlayerData _playerData;
-
-        public void Save()
+        public SaveLoadService()
         {
+            _dataReaders = new();
+            _dataWriters = new();
+        }
+
+        public void Save(PlayerData playerData)
+        {
+            if (playerData == null)
+                return;
+
             foreach (var dataWriter in _dataWriters)
             {
-                dataWriter.Write(_playerData);
+                dataWriter.Write(playerData);
             }
 
-            string data = JsonUtility.ToJson(_playerData);
+            string data = JsonUtility.ToJson(playerData);
             PlayerPrefs.SetString(Key, data);
             PlayerPrefs.Save();
         }
@@ -32,12 +40,22 @@ namespace Source.Codebase.Services
                 return;
 
             string data = PlayerPrefs.GetString(Key);
-            _playerData = JsonUtility.FromJson<PlayerData>(data);
+
+            if (string.IsNullOrEmpty(data))
+                return;
+            
+            PlayerData playerData = JsonUtility.FromJson<PlayerData>(data);
 
             foreach (var dataReader in _dataReaders)
             {
-                dataReader.Read(_playerData);
+                dataReader.Read(playerData);
             }
         }
+
+        public void AddIDataReader(IDataReader dataReader)
+            => _dataReaders.Add(dataReader);
+
+        public void AddIDataWriter(IDataWriter dataWriter)
+            => _dataWriters.Add(dataWriter);
     }
 }

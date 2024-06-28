@@ -8,23 +8,21 @@ namespace Source.Codebase.Controllers.Presenters
     {
         private readonly ClickEffect _clickEffect;
         private readonly ClickEffectView _clickEffectView;
-        private readonly int _clickForce = 1;
 
         public ClickEffectPresenter(
             ClickEffect clickEffect,
-            ClickEffectView view,
-            int clickForce)
+            ClickEffectView view)
         {
             _clickEffect = clickEffect;
             _clickEffectView = view;
-            _clickForce = clickForce;
         }
 
-        public void Enable()
+        public async void Enable()
         {
-            string text = $"+ {_clickForce}";
+            string text = $"+ {_clickEffect.ClickForce}";
             _clickEffectView.SetText(text);
-            _clickEffectView.PlayAnimation();
+            await _clickEffectView.PlayAnimation(_clickEffect.LifeTime, _clickEffect.LifeTime);
+            _clickEffectView.Destroy();
         }
 
         public void Disable() { }
