@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace Source.Codebase.Data
 {
     [System.Serializable]
@@ -7,5 +9,6 @@ namespace Source.Codebase.Data
         public int LastClickCount;
         public int CurrentLevel;
         public int NeedClickPerNextLevel;
+        public List<ItemData> ItemsData;
     }
 }

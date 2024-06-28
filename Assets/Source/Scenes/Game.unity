@@ -160,7 +160,9 @@ MonoBehaviour:
   _clickEffectConfig: {fileID: 11400000, guid: b68ecee260509184b8f6aa5d3a9dd525, type: 2}
   _canvasTemplate: {fileID: 2123940457531588709, guid: 51010bdf015309e409f0f4e2c7fcd719, type: 3}
   _cameraTemplate: {fileID: 2023816764358013359, guid: 1d08c2fcc247f784db6598a7c5489a20, type: 3}
-  _levelInfoTemplate: {fileID: 2568930453499845666, guid: 9d9c645e03d348a418588f0f7bd0105c, type: 3}
+  _windowHolderTemplate: {fileID: 3619339867665128610, guid: f38dc64adf237364ea868905c8cfa823, type: 3}
+  _startWindowTemplate: {fileID: 1032829509130233022, guid: 0843f5545d76cbb41bb302aeaf292b39, type: 3}
+  _upgradeWindowTemplate: {fileID: 8091462143516584781, guid: 905996c16b223fc459d515e21ceaa7ee, type: 3}
 --- !u!4 &1801868703
 Transform:
   m_ObjectHideFlags: 0

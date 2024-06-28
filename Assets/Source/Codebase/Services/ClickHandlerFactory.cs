@@ -1,6 +1,7 @@
 using Source.Codebase.Controllers.Presenters;
 using Source.Codebase.Domain.Models;
 using Source.Codebase.Presentation;
+using Source.Codebase.Presentation.Windows;
 using Source.Codebase.Services.Abstract;
 using UnityEngine;
 
@@ -12,7 +13,7 @@ namespace Source.Codebase.Services
         private readonly ISaveLoadService _saveLoadService;
         private readonly ClickEffectFactory _clickEffectFactory;
         private readonly GameLoopService _gameLoopService;
-        private readonly Transform _parent;
+        private readonly StartWindow _startWindow;
         private readonly Camera _camera;
 
         public ClickHandlerFactory(
@@ -20,14 +21,14 @@ namespace Source.Codebase.Services
             ISaveLoadService saveLoadService,
             ClickEffectFactory clickEffectFactory,
             GameLoopService gameLoopService,
-            Transform parent,
+            StartWindow startWindow,
             Camera camera)
         {
             _staticDataService = staticDataService;
             _saveLoadService = saveLoadService;
             _clickEffectFactory = clickEffectFactory;
             _gameLoopService = gameLoopService;
-            _parent = parent;
+            _startWindow = startWindow;
             _camera = camera;
         }
 
@@ -38,7 +39,7 @@ namespace Source.Codebase.Services
             _saveLoadService.AddIDataWriter(clickHandler);
             ClickHandlerView template =
                 _staticDataService.GetViewTemplate<ClickHandlerView>();
-            ClickHandlerView view = Object.Instantiate(template, _parent);
+            ClickHandlerView view = Object.Instantiate(template, _startWindow.transform);
             ClickHandlerPresenter presenter =
                 new(clickHandler, view, _clickEffectFactory, _gameLoopService, _camera);
             view.Construct(presenter);

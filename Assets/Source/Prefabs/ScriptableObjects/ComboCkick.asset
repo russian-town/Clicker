@@ -10,8 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d0ebc77815d8b0a4fbd56a65aca7996e, type: 3}
-  m_Name: New Item
+  m_Name: ComboCkick
   m_EditorClassIdentifier: 
-  <Name>k__BackingField: 
-  <Price>k__BackingField: 0
-  <ClickForce>k__BackingField: 0
+  <Name>k__BackingField: Combo
+  <Price>k__BackingField: 5000
+  <ClickForce>k__BackingField: 10
+  <Icon>k__BackingField: {fileID: 21300000, guid: f9bc6671495946748a8b6207348776df, type: 3}
+  <ClickType>k__BackingField: 4

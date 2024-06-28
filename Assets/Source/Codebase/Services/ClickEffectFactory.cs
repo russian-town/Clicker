@@ -3,6 +3,7 @@ using Source.Codebase.Domain.Configs;
 using Source.Codebase.Domain.Models;
 using Source.Codebase.Infrastructure.Pool.Abstract;
 using Source.Codebase.Presentation;
+using Source.Codebase.Presentation.Windows;
 using Source.Codebase.Services.Abstract;
 using UnityEngine;
 
@@ -11,18 +12,18 @@ namespace Source.Codebase.Services
     public class ClickEffectFactory
     {
         private readonly IStaticDataService _staticDataService;
-        private readonly Transform _parent;
+        private readonly StartWindow _startWindow;
         private readonly IPool _pool;
         private readonly ClickEffectConfig _config;
 
         public ClickEffectFactory(
             IStaticDataService staticDataService,
-            Transform parent,
+            StartWindow startWindow,
             IPool pool,
             ClickEffectConfig config)
         {
             _staticDataService = staticDataService;
-            _parent = parent;
+            _startWindow = startWindow;
             _pool = pool;
             _config = config;
         }
@@ -38,7 +39,7 @@ namespace Source.Codebase.Services
                 ClickEffectView template =
                     _staticDataService.GetViewTemplate<ClickEffectView>();
                 view =
-                    Object.Instantiate(template, position, Quaternion.identity, _parent);
+                    Object.Instantiate(template, position, Quaternion.identity, _startWindow.transform);
                 view.SetPool(_pool);
             }
             else

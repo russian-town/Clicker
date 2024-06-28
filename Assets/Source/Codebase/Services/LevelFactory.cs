@@ -1,6 +1,7 @@
 using Source.Codebase.Controllers.Presenters;
 using Source.Codebase.Domain.Models;
 using Source.Codebase.Presentation;
+using Source.Codebase.Presentation.Windows;
 using Source.Codebase.Services.Abstract;
 using UnityEngine;
 
@@ -11,18 +12,18 @@ namespace Source.Codebase.Services
         private readonly IStaticDataService _staticDataService;
         private readonly ISaveLoadService _saveLoadService;
         private readonly GameLoopService _gameLoopService;
-        private readonly Transform _parent;
+        private readonly StartWindow _startWindow;
 
         public LevelFactory(
             IStaticDataService staticDataService,
             ISaveLoadService saveLoadService,
             GameLoopService gameLoopService,
-            Transform parent)
+            StartWindow startWindow)
         {
             _staticDataService = staticDataService;
             _saveLoadService = saveLoadService;
             _gameLoopService = gameLoopService;
-            _parent = parent;
+            _startWindow = startWindow;
         }
 
         public void Create()
@@ -32,7 +33,7 @@ namespace Source.Codebase.Services
             _saveLoadService.AddIDataWriter(level);
             LevelView template =
                 _staticDataService.GetViewTemplate<LevelView>();
-            LevelView view = Object.Instantiate(template, _parent);
+            LevelView view = Object.Instantiate(template, _startWindow.transform);
             LevelPresenter levelPresenter = new(level, view, _gameLoopService);
             view.Construct(levelPresenter);
         }

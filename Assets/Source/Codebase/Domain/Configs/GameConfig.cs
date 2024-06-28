@@ -9,5 +9,7 @@ namespace Source.Codebase.Domain.Configs
         [field: SerializeField] public ClickEffectView ClickEffectViewTemplate { get; private set; }
         [field: SerializeField] public LevelView LevelViewTemplate { get; private set; }
         [field: SerializeField] public ClickHandlerView ClickHandlerViewTemplate { get; private set; }
+        [field: SerializeField] public ItemView ItemViewTemplate { get; private set; }
+        [field: SerializeField] public ItemConfig[] ItemConfigs { get; private set; }
     }
 }
