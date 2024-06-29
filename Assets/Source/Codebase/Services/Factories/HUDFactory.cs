@@ -35,8 +35,14 @@ namespace Source.Codebase.Services.Factories
             HUDView template =
                 _staticDataService.GetViewTemplate<HUDView>();
             HUDView view = Object.Instantiate(template);
-            HUDPresenter presenter =
-                new(hud, view, _pageConfigs, _pageFactory, _pageButtonFactory, _camera);
+            HUDPresenter presenter = new(
+                hud,
+                view,
+                _staticDataService,
+                _pageConfigs,
+                _pageFactory,
+                _pageButtonFactory,
+                _camera);
             view.Construct(presenter);
         }
     }

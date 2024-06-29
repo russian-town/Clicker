@@ -58,12 +58,14 @@ namespace Source.Codebase.Infrastructure
             _hudFactory.Create();
             Transform startPage = _pageService.GetPageByIndex(PageIndex.Home);
             Transform shopPage = _pageService.GetPageByIndex(PageIndex.Shop);
-            Scroll scroll = new Scroll();
-            ScrollView scrollViewTemplate =
-                _staticDataService.GetViewTemplate<ScrollView>();
+            ScrollConfig scrollConfig =
+                _staticDataService.GetScrollConfig(ScrollType.Item);
+            Scroll scroll = new Scroll(scrollConfig);
             ScrollView scrollView =
-                Object.Instantiate(scrollViewTemplate, shopPage);
-            ScrollPresenter scrollPresenter = new(scroll, scrollView);
+                Object.Instantiate(scrollConfig.ScrollViewTemplate, shopPage);
+            ScrollService scrollService = new();
+            ScrollPresenter scrollPresenter =
+                new(scroll, scrollView, scrollService);
             scrollView.Construct(scrollPresenter);
             _levelFactory.Create(startPage);
             _clickHandlerFactory.Create(startPage);

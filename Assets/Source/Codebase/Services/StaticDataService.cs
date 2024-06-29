@@ -15,17 +15,20 @@ namespace Source.Codebase.Services
 
         private Dictionary<ClickType, ItemConfig> _itemConfigByClickType;
         private Dictionary<PageIndex, PageConfig> _pageConfigByIndex;
+        private Dictionary<ScrollType, ScrollConfig> _scrollConfigByType;
 
         public StaticDataService()
         {
             _viewTemplateByType = new();
             _itemConfigByClickType = new();
+            _scrollConfigByType = new();
         }
 
         public void LoadGameConfig(GameConfig gameConfig)
         {
             LoadItemConfigs(gameConfig.ItemConfigs);
             LoadPageConfigs(gameConfig.PageConfigs);
+            LoadScrollConfigs(gameConfig.ScrollConfigs);
             _viewTemplateByType.Clear();
             _viewTemplateByType.Add(typeof(LevelView), gameConfig.LevelViewTemplate);
             _viewTemplateByType.Add(typeof(ClickHandlerView), gameConfig.ClickHandlerViewTemplate);
@@ -34,7 +37,6 @@ namespace Source.Codebase.Services
             _viewTemplateByType.Add(typeof(PageView), gameConfig.PageViewTemplate);
             _viewTemplateByType.Add(typeof(PageButtonView), gameConfig.PageButtonViewTemplate);
             _viewTemplateByType.Add(typeof(HUDView), gameConfig.HUDViewTemplate);
-            _viewTemplateByType.Add(typeof(ScrollView), gameConfig.ScrollViewTemplate);
         }
 
         public T GetViewTemplate<T>() where T : MonoBehaviour
@@ -61,10 +63,18 @@ namespace Source.Codebase.Services
             return _pageConfigByIndex[pageIndex];
         }
 
+        public ScrollConfig GetScrollConfig(ScrollType scrollType)
+        {
+            if (_scrollConfigByType.ContainsKey(scrollType) == false)
+                throw new Exception($"ScrollConfig for ScrollType {scrollType} does not exist!");
+
+            return _scrollConfigByType[scrollType];
+        }
+
         private void LoadItemConfigs(ItemConfig[] itemConfigs)
         {
             if (itemConfigs.Length != itemConfigs.Distinct().Count())
-                throw new Exception("All candiConfigs must be distinct");
+                throw new Exception("All item configs must be distinct");
 
             _itemConfigByClickType =
                 itemConfigs.ToDictionary(
@@ -75,12 +85,23 @@ namespace Source.Codebase.Services
         private void LoadPageConfigs(PageConfig[] pageConfigs)
         {
             if (pageConfigs.Length != pageConfigs.Distinct().Count())
-                throw new Exception("All candiConfigs must be distinct");
+                throw new Exception("All page configs must be distinct");
 
             _pageConfigByIndex =
                 pageConfigs.ToDictionary(
                     pageConfigs => pageConfigs.PageIndex,
                     pageConfigs => pageConfigs);
+        }
+
+        private void LoadScrollConfigs(ScrollConfig[] scrollConfigs)
+        {
+            if (scrollConfigs.Length != scrollConfigs.Distinct().Count())
+                throw new Exception("All scroll configs must be distinct");
+
+            _scrollConfigByType =
+                scrollConfigs.ToDictionary(
+                    scrollConfigs => scrollConfigs.ScrollType,
+                    scrollConfigs => scrollConfigs);
         }
     }
 }

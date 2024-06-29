@@ -9,6 +9,8 @@ namespace Source.Codebase.Services.UI
     {
         private readonly Dictionary<PageIndex, Transform> _pageByIndex = new();
 
+        public event Action<Transform> PageMoved;
+
         public void RegistrePage(PageIndex pageIndex, Transform transform)
         {
             _pageByIndex.Add(pageIndex, transform);

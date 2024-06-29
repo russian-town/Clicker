@@ -24,7 +24,7 @@ namespace Source.Codebase.Services.Factories
             _config = config;
         }
 
-        public void Create(int clickForce, Vector2 position)
+        public void Create(int clickForce, Vector2 position, Transform parent)
         {
             ClickEffect clickEffect =
                 new(_config.LifeTime, _config.FadeDuration, clickForce);
@@ -35,7 +35,7 @@ namespace Source.Codebase.Services.Factories
                 ClickEffectView template =
                     _staticDataService.GetViewTemplate<ClickEffectView>();
                 view =
-                    Object.Instantiate(template, position, Quaternion.identity);
+                    Object.Instantiate(template, position, Quaternion.identity, parent);
                 view.SetPool(_pool);
             }
             else

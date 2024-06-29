@@ -36,8 +36,13 @@ namespace Source.Codebase.Services.Factories
             ClickHandlerView template =
                 _staticDataService.GetViewTemplate<ClickHandlerView>();
             ClickHandlerView view = Object.Instantiate(template, parent);
-            ClickHandlerPresenter presenter =
-                new(clickHandler, view, _clickEffectFactory, _gameLoopService, _camera);
+            ClickHandlerPresenter presenter = new(
+                clickHandler,
+                view,
+                _clickEffectFactory,
+                _gameLoopService,
+                _camera,
+                parent);
             view.Construct(presenter);
         }
     }

@@ -6,7 +6,6 @@ namespace Source.Codebase.Presentation
     public class HUDView : ViewBase
     {
         [field: SerializeField] public Transform ButtonGroup { get; private set; }
-        [field: SerializeField] public Transform PageHolder { get; private set; }
         [field: SerializeField] public Canvas Canvas { get; private set; }
     }
 }
