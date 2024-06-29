@@ -9,7 +9,15 @@ namespace Source.Codebase.Domain.Configs
         [field: SerializeField] public ClickEffectView ClickEffectViewTemplate { get; private set; }
         [field: SerializeField] public LevelView LevelViewTemplate { get; private set; }
         [field: SerializeField] public ClickHandlerView ClickHandlerViewTemplate { get; private set; }
+        [field: SerializeField] public PageView PageViewTemplate { get; private set; }
+        [field: SerializeField] public PageButtonView PageButtonViewTemplate { get; private set; }
         [field: SerializeField] public ItemView ItemViewTemplate { get; private set; }
+        [field: SerializeField] public Canvas CanvasTemplate { get; private set; }
+        [field: SerializeField] public Camera CameraTemplate { get; private set; }
+        [field: SerializeField] public HUDView HUDViewTemplate { get; private set; }
+        [field: SerializeField] public ScrollView ScrollViewTemplate { get; private set; }
         [field: SerializeField] public ItemConfig[] ItemConfigs { get; private set; }
+        [field: SerializeField] public ClickEffectConfig ClickEffectConfig { get; private set; }
+        [field: SerializeField] public PageConfig[] PageConfigs { get; private set; }
     }
 }

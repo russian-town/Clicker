@@ -1,8 +1,15 @@
+using Source.Codebase.Controllers.Presenters;
 using Source.Codebase.Data;
 using Source.Codebase.Data.Abstract;
+using Source.Codebase.Domain;
 using Source.Codebase.Domain.Configs;
+using Source.Codebase.Domain.Models;
+using Source.Codebase.Presentation;
 using Source.Codebase.Services;
 using Source.Codebase.Services.Abstract;
+using Source.Codebase.Services.Factories;
+using Source.Codebase.Services.UI;
+using UnityEngine;
 using VContainer.Unity;
 
 namespace Source.Codebase.Infrastructure
@@ -16,8 +23,9 @@ namespace Source.Codebase.Infrastructure
         private readonly ISaveLoadService _saveLoadService;
         private readonly ItemFactory _itemFactory;
         private readonly ItemViewFactory _itemViewFactory;
-
-        private SaveDataInjector _saveDataInjector;
+        private readonly SaveDataInjector _saveDataInjector;
+        private readonly HUDFactory _hudFactory;
+        private readonly PageService _pageService;
 
         public EntryPoint(
             StaticDataService staticDataService,
@@ -27,7 +35,9 @@ namespace Source.Codebase.Infrastructure
             ISaveLoadService saveLoadService,
             ItemFactory itemFactory,
             ItemViewFactory itemViewFactory,
-            SaveDataInjector saveDataInjector)
+            SaveDataInjector saveDataInjector,
+            HUDFactory hudFactory,
+            PageService pageService)
         {
             _staticDataService = staticDataService;
             _clickHandlerFactory = clickHandlerFactory;
@@ -37,14 +47,26 @@ namespace Source.Codebase.Infrastructure
             _itemFactory = itemFactory;
             _itemViewFactory = itemViewFactory;
             _saveDataInjector = saveDataInjector;
+            _hudFactory = hudFactory;
+            _pageService = pageService;
         }
 
         public void Initialize()
         {
             _saveLoadService.AddIDataReader(this);
             _staticDataService.LoadGameConfig(_gameConfig);
-            _levelFactory.Create();
-            _clickHandlerFactory.Create();
+            _hudFactory.Create();
+            Transform startPage = _pageService.GetPageByIndex(PageIndex.Home);
+            Transform shopPage = _pageService.GetPageByIndex(PageIndex.Shop);
+            Scroll scroll = new Scroll();
+            ScrollView scrollViewTemplate =
+                _staticDataService.GetViewTemplate<ScrollView>();
+            ScrollView scrollView =
+                Object.Instantiate(scrollViewTemplate, shopPage);
+            ScrollPresenter scrollPresenter = new(scroll, scrollView);
+            scrollView.Construct(scrollPresenter);
+            _levelFactory.Create(startPage);
+            _clickHandlerFactory.Create(startPage);
             _saveLoadService.Load();
             var items = _itemFactory.Get(_gameConfig.ItemConfigs);
 
@@ -55,7 +77,7 @@ namespace Source.Codebase.Infrastructure
 
             foreach (var item in items)
             {
-                _itemViewFactory.Create(item);
+                _itemViewFactory.Create(item, scrollView.Container);
             }
         }
 

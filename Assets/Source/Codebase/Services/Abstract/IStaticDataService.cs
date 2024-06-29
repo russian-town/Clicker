@@ -8,5 +8,6 @@ namespace Source.Codebase.Services.Abstract
     {
         public T GetViewTemplate<T>() where T : MonoBehaviour;
         public ItemConfig GetItemConfig(ClickType clickType);
+        public PageConfig GetPageConfig(PageIndex pageIndex);
     }
 }
