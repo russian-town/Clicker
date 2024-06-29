@@ -118,7 +118,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <ButtonGroup>k__BackingField: {fileID: 1209122472877839274}
-  <PageHolder>k__BackingField: {fileID: 0}
   <Canvas>k__BackingField: {fileID: 2123940457531588709}
 --- !u!1 &8335140951236859247
 GameObject:

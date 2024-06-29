@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b396ee8de3cd2f4c9a2c568a491e441, type: 3}
   m_Name: Item
   m_EditorClassIdentifier: 
-  <ScrollType>k__BackingField: 0
-  <ScrollViewTemplate>k__BackingField: {fileID: 0}
+  <ScrollType>k__BackingField: 2
+  <ScrollViewTemplate>k__BackingField: {fileID: 5047295186166891623, guid: f38dc64adf237364ea868905c8cfa823, type: 3}
+  <MoveDuration>k__BackingField: 0.5

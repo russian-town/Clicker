@@ -37,6 +37,7 @@ namespace Source.Codebase.Services
             _viewTemplateByType.Add(typeof(PageView), gameConfig.PageViewTemplate);
             _viewTemplateByType.Add(typeof(PageButtonView), gameConfig.PageButtonViewTemplate);
             _viewTemplateByType.Add(typeof(HUDView), gameConfig.HUDViewTemplate);
+            _viewTemplateByType.Add(typeof(WalletView), gameConfig.WalletViewTemplate);
         }
 
         public T GetViewTemplate<T>() where T : MonoBehaviour

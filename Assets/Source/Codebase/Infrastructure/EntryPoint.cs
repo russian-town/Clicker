@@ -26,6 +26,10 @@ namespace Source.Codebase.Infrastructure
         private readonly SaveDataInjector _saveDataInjector;
         private readonly HUDFactory _hudFactory;
         private readonly PageService _pageService;
+        private readonly GameLoopService _gameLoopService;
+        private readonly ProgressService _progressService;
+
+        private ShopService _shopService;
 
         public EntryPoint(
             StaticDataService staticDataService,
@@ -37,7 +41,9 @@ namespace Source.Codebase.Infrastructure
             ItemViewFactory itemViewFactory,
             SaveDataInjector saveDataInjector,
             HUDFactory hudFactory,
-            PageService pageService)
+            PageService pageService,
+            GameLoopService gameLoopService,
+            ProgressService progressService)
         {
             _staticDataService = staticDataService;
             _clickHandlerFactory = clickHandlerFactory;
@@ -49,6 +55,8 @@ namespace Source.Codebase.Infrastructure
             _saveDataInjector = saveDataInjector;
             _hudFactory = hudFactory;
             _pageService = pageService;
+            _gameLoopService = gameLoopService;
+            _progressService = progressService;
         }
 
         public void Initialize()
@@ -60,7 +68,7 @@ namespace Source.Codebase.Infrastructure
             Transform shopPage = _pageService.GetPageByIndex(PageIndex.Shop);
             ScrollConfig scrollConfig =
                 _staticDataService.GetScrollConfig(ScrollType.Item);
-            Scroll scroll = new Scroll(scrollConfig);
+            Scroll scroll = new(scrollConfig);
             ScrollView scrollView =
                 Object.Instantiate(scrollConfig.ScrollViewTemplate, shopPage);
             ScrollService scrollService = new();
@@ -70,6 +78,21 @@ namespace Source.Codebase.Infrastructure
             _levelFactory.Create(startPage);
             _clickHandlerFactory.Create(startPage);
             _saveLoadService.Load();
+            Wallet wallet = new();
+            _saveLoadService.AddIDataWriter(wallet);
+            _saveDataInjector.Update(wallet);
+            WalletView walletViewTemplate =
+                _staticDataService.GetViewTemplate<WalletView>();
+            _shopService = new(wallet);
+            WalletView walletView =
+                Object.Instantiate(walletViewTemplate, shopPage);
+            WalletPresenter walletPresenter = new(
+                wallet,
+                walletView,
+                _gameLoopService,
+                _progressService,
+                _shopService);
+            walletView.Construct(walletPresenter);
             var items = _itemFactory.Get(_gameConfig.ItemConfigs);
 
             foreach (var item in items)
@@ -79,11 +102,18 @@ namespace Source.Codebase.Infrastructure
 
             foreach (var item in items)
             {
-                _itemViewFactory.Create(item, scrollView.Container);
+                _saveLoadService.AddIDataWriter(item);
+                _itemViewFactory.Create(
+                    item,
+                    scrollView.Container,
+                    _shopService);
             }
         }
 
         public void Read(PlayerData playerData)
-            => _saveDataInjector.SetData(playerData.ItemsData);
+        {
+            _saveDataInjector.SetData(playerData);
+            _progressService.SetPlayerData(playerData);
+        } 
     }
 }

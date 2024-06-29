@@ -35,18 +35,22 @@ namespace Source.Codebase.Controllers.Presenters
         public void Enable()
         {
             _view.Clicked += OnClicked;
-            _clickHandler.ClickForceUpdated += OnClickForceUpdated;
-            OnClickForceUpdated();
+            _gameLoopService.ClickForceUpdated += OnClickForceUpdated;
         }
 
         public void Disable()
         {
             _view.Clicked -= OnClicked;
-            _clickHandler.ClickForceUpdated -= OnClickForceUpdated;
+            _gameLoopService.ClickForceUpdated -= OnClickForceUpdated;
         }
 
-        private void OnClickForceUpdated()
-            => _gameLoopService.UpdateClickForce(_clickHandler.ClickForce);
+        private void OnClickForceUpdated(int clickForce)
+        {
+            if (_clickHandler.ClickForce > clickForce)
+                return;
+
+            _clickHandler.UpdateClickForce(clickForce);
+        } 
 
         private void OnClicked(Vector2 screenPosition)
         {

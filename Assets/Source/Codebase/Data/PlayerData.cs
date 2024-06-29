@@ -10,5 +10,6 @@ namespace Source.Codebase.Data
         public int CurrentLevel;
         public int NeedClickPerNextLevel;
         public List<ItemData> ItemsData;
+        public WalletData WalletData;
     }
 }

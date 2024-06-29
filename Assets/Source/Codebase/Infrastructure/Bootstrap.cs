@@ -33,11 +33,16 @@ namespace Source.Codebase.Infrastructure
 
             foreach (var itemConfig in _itemConfigs)
             {
-                ItemData itemData = new();
-                itemData.IsBought = false;
-                itemData.ClickType = itemConfig.ClickType;
+                ItemData itemData = new()
+                {
+                    IsBought = false,
+                    ClickType = itemConfig.ClickType
+                };
+
                 itemsData.Add(itemData);
             }
+
+            WalletData walletData = new();
 
             _playerData = new()
             {
@@ -45,7 +50,8 @@ namespace Source.Codebase.Infrastructure
                 CurrentLevel = 1,
                 CurrentClickForce = 1,
                 LastClickCount = 0,
-                ItemsData = itemsData
+                ItemsData = itemsData,
+                WalletData = walletData
             };
 
             _saveLoadService.Save(_playerData);

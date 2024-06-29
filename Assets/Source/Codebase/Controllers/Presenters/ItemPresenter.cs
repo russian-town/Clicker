@@ -2,6 +2,8 @@ using Source.Codebase.Controllers.Presenters.Abstract;
 using Source.Codebase.Domain.Configs;
 using Source.Codebase.Domain.Models;
 using Source.Codebase.Presentation;
+using Source.Codebase.Services;
+using Source.Codebase.Services.Abstract;
 
 namespace Source.Codebase.Controllers.Presenters
 {
@@ -10,26 +12,32 @@ namespace Source.Codebase.Controllers.Presenters
         private readonly Item _item;
         private readonly ItemView _view;
         private readonly ItemConfig _config;
+        private readonly IProgressService _progressService;
+        private readonly GameLoopService _gameLoopService;
+        private readonly ShopService _shopService;
 
         public ItemPresenter(
             Item item,
             ItemView view, 
-            ItemConfig config)
+            ItemConfig config,
+            IProgressService progressService,
+            GameLoopService gameLoopService,
+            ShopService shopService)
         {
             _item = item;
             _view = view;
             _config = config;
+            _progressService = progressService;
+            _gameLoopService = gameLoopService;
+            _shopService = shopService;
+
         }
 
         public void Enable()
         {
             _view.SellButton.onClick.AddListener(OnSellButtonClicked);
-
-            if(_item.IsBought)
-                _view.DisableSellButton();
-            else
-                _view.EnableSellButton();
-
+            _item.Bought += OnBought;
+            UpdateView();
             string clickForceText = $"+ {_config.ClickForce}";
             _view.SetClickForceText(clickForceText);
             string priceText = _config.Price.ToString();
@@ -41,8 +49,25 @@ namespace Source.Codebase.Controllers.Presenters
         public void Disable()
             => _view.SellButton.onClick.RemoveListener(OnSellButtonClicked);
 
+        private void UpdateView()
+        {
+            if (_item.IsBought)
+                _view.DisableSellButton();
+            else
+                _view.EnableSellButton();
+        }
+
         private void OnSellButtonClicked()
         {
-        }
+            if (_shopService.TrySell(_config.Price))
+            {
+                _item.By();
+                _gameLoopService.UpdateClickForce(_config.ClickForce);
+                UpdateView();
+            }
+        } 
+
+        private void OnBought()
+            => _progressService.Save();
     }
 }

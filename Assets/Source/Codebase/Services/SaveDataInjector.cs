@@ -9,9 +9,13 @@ namespace Source.Codebase.Services
     public class SaveDataInjector
     {
         private List<ItemData> _itemsData;
+        private WalletData _walletData;
 
-        public void SetData(List<ItemData> itemsData)
-            => _itemsData = itemsData;
+        public void SetData(PlayerData playerData)
+        {
+            _itemsData = playerData.ItemsData;
+            _walletData = playerData.WalletData;
+        } 
 
         public void Update(Item item)
         {
@@ -27,5 +31,8 @@ namespace Source.Codebase.Services
                 }
             }
         }
+
+        public void Update(Wallet wallet)
+            => wallet.ApplyData(_walletData);
     }
 }

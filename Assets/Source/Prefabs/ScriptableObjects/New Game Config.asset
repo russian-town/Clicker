@@ -21,13 +21,16 @@ MonoBehaviour:
   <CanvasTemplate>k__BackingField: {fileID: 2123940457531588709, guid: 51010bdf015309e409f0f4e2c7fcd719, type: 3}
   <CameraTemplate>k__BackingField: {fileID: 2023816764358013359, guid: 1d08c2fcc247f784db6598a7c5489a20, type: 3}
   <HUDViewTemplate>k__BackingField: {fileID: 2420636553062796091, guid: 51010bdf015309e409f0f4e2c7fcd719, type: 3}
-  <ScrollViewTemplate>k__BackingField: {fileID: 2775976630718269552, guid: f7b3fa1dcfe0ef14ebd01f20fa721d65, type: 3}
+  <WalletViewTemplate>k__BackingField: {fileID: 1020327055510640254, guid: be965ec8f0cf463439483a5f58bf840a, type: 3}
+  <ClickEffectConfig>k__BackingField: {fileID: 11400000, guid: b68ecee260509184b8f6aa5d3a9dd525, type: 2}
   <ItemConfigs>k__BackingField:
   - {fileID: 11400000, guid: eaafbbcaf2251cc4c846db745e821f0d, type: 2}
   - {fileID: 11400000, guid: 7321f6b3a532fca49b780035d0378ba4, type: 2}
   - {fileID: 11400000, guid: abbf97c6568298d419f15baacf2c77c0, type: 2}
   - {fileID: 11400000, guid: 45285f8d6d7ce6748b83099e2ba95b66, type: 2}
-  <ClickEffectConfig>k__BackingField: {fileID: 11400000, guid: b68ecee260509184b8f6aa5d3a9dd525, type: 2}
+  <ScrollConfigs>k__BackingField:
+  - {fileID: 11400000, guid: db4a6a56ebcd0874b8e700d4d4465cf2, type: 2}
+  - {fileID: 11400000, guid: e26a96a672fba6c4095973ddee083dd1, type: 2}
   <PageConfigs>k__BackingField:
   - {fileID: 11400000, guid: 4de381dea16f54f40b9a87abc59e17ac, type: 2}
   - {fileID: 11400000, guid: 6da8ccac4fc04f24996ff27130a895d3, type: 2}

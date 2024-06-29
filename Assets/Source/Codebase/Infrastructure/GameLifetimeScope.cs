@@ -21,6 +21,7 @@ public class GameLifetimeScope : LifetimeScope
         builder.Register<Pool>(Lifetime.Transient).AsImplementedInterfaces().AsSelf();
         builder.Register<StaticDataService>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
         builder.Register<GameLoopService>(Lifetime.Singleton);
+        builder.Register<ProgressService>(Lifetime.Singleton).AsImplementedInterfaces().AsSelf();
         builder.Register<ClickHandlerFactory>(Lifetime.Singleton);
         builder.Register<ClickEffectFactory>(Lifetime.Singleton);
         builder.Register<LevelFactory>(Lifetime.Singleton);
