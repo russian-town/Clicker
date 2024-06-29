@@ -28,6 +28,8 @@ namespace Source.Codebase.Infrastructure
         private readonly PageService _pageService;
         private readonly GameLoopService _gameLoopService;
         private readonly ProgressService _progressService;
+        private readonly PopUpWindowFactory _popUpWindowFactory;
+        private readonly int _popUpWindowCount = 4;
 
         private ShopService _shopService;
 
@@ -43,7 +45,8 @@ namespace Source.Codebase.Infrastructure
             HUDFactory hudFactory,
             PageService pageService,
             GameLoopService gameLoopService,
-            ProgressService progressService)
+            ProgressService progressService,
+            PopUpWindowFactory popUpWindowFactory)
         {
             _staticDataService = staticDataService;
             _clickHandlerFactory = clickHandlerFactory;
@@ -57,6 +60,7 @@ namespace Source.Codebase.Infrastructure
             _pageService = pageService;
             _gameLoopService = gameLoopService;
             _progressService = progressService;
+            _popUpWindowFactory = popUpWindowFactory;
         }
 
         public void Initialize()
@@ -66,6 +70,13 @@ namespace Source.Codebase.Infrastructure
             _hudFactory.Create();
             Transform startPage = _pageService.GetPageByIndex(PageIndex.Home);
             Transform shopPage = _pageService.GetPageByIndex(PageIndex.Shop);
+            Transform newsPage = _pageService.GetPageByIndex(PageIndex.News);
+
+            for (int i = 0; i < _popUpWindowCount; i++)
+            {
+                _popUpWindowFactory.Create(newsPage);
+            }
+
             ScrollConfig scrollConfig =
                 _staticDataService.GetScrollConfig(ScrollType.Item);
             Scroll scroll = new(scrollConfig);

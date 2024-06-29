@@ -32,6 +32,7 @@ public class GameLifetimeScope : LifetimeScope
         builder.Register<PageService>(Lifetime.Singleton);
         builder.Register<PageFactory>(Lifetime.Singleton);
         builder.Register<PageButtonFactory>(Lifetime.Singleton);
+        builder.Register<PopUpWindowFactory>(Lifetime.Singleton);
         builder.RegisterEntryPoint<EntryPoint>();
     }
 

@@ -34,6 +34,7 @@ namespace Source.Codebase.Controllers.Presenters
         {
             _view.Button.onClick.AddListener(OnButtonClicked);
             _view.SetIcon(_config.ButtonIcon);
+            
         }
 
         public void Disable()

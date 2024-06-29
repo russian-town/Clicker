@@ -3,7 +3,7 @@ using UnityEngine.UI;
 
 namespace Source.Codebase.Presentation.Abstract
 {
-    public class PopUpWindowBase : PoolableViewBase
+    public abstract class PopUpWindowBase : PoolableViewBase
     {
         [field: SerializeField] public Button CloseButton { get; private set; }
 

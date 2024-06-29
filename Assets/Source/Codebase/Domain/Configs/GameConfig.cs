@@ -16,6 +16,7 @@ namespace Source.Codebase.Domain.Configs
         [field: SerializeField] public Camera CameraTemplate { get; private set; }
         [field: SerializeField] public HUDView HUDViewTemplate { get; private set; }
         [field: SerializeField] public WalletView WalletViewTemplate { get; private set; }
+        [field: SerializeField] public PopUpWindowView PopUpWindowViewTemplate { get; private set; }
         [field: SerializeField] public ClickEffectConfig ClickEffectConfig { get; private set; }
         [field: SerializeField] public ItemConfig[] ItemConfigs { get; private set; }
         [field: SerializeField] public ScrollConfig[] ScrollConfigs { get; private set; }

@@ -32,7 +32,10 @@ namespace Source.Codebase.Controllers.Presenters
         {
             Vector2 targetPostion =
                 new(target.localPosition.x, target.localPosition.y);
-            _view.StartMoveAnimation(targetPostion, _scroll.MoveDuration);
+            _view.StartMoveAnimation(
+                targetPostion,
+                _scroll.MoveDuration, 
+                _scrollService.EndScroll);
         }
     }
 }
