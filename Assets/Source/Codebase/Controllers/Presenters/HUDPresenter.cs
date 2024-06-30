@@ -16,10 +16,7 @@ namespace Source.Codebase.Controllers.Presenters
         private readonly IStaticDataService _staticDataService;
         private readonly PageConfig[] _pageConfigs;
         private readonly PageFactory _pageFactory;
-        private readonly PageButtonFactory _pageButtonFactory;
-        private readonly ScrollService _scrollService;
-
-        private PageScrollView _pageScrollView;
+        private readonly PageScrollService _scrollService;
 
         public HUDPresenter(
             HUD hud,
@@ -27,7 +24,7 @@ namespace Source.Codebase.Controllers.Presenters
             IStaticDataService staticDataService,
             PageConfig[] pageConfigs,
             PageFactory pageFactory,
-            PageButtonFactory pageButtonFactory,
+            PageScrollService pageScrollService,
             Camera camera)
         {
             _hud = hud;
@@ -35,8 +32,7 @@ namespace Source.Codebase.Controllers.Presenters
             _staticDataService = staticDataService;
             _pageConfigs = pageConfigs;
             _pageFactory = pageFactory;
-            _pageButtonFactory = pageButtonFactory;
-            _scrollService = new();
+            _scrollService = pageScrollService;
             _view.Canvas.worldCamera = camera;
         }
 
@@ -45,20 +41,17 @@ namespace Source.Codebase.Controllers.Presenters
             PageScroll pageScroll = new();
             PageScrollView template =
                 _staticDataService.GetViewTemplate<PageScrollView>();
-            _pageScrollView = Object.Instantiate(template, _view.transform);
+            PageScrollView pageScrollView = Object.Instantiate(template, _view.transform);
             PageScrollPresenter pageScrollPresenter =
-                new(pageScroll, _pageScrollView, _scrollService);
-            _pageScrollView.Construct(pageScrollPresenter);
+                new(pageScroll, pageScrollView, _scrollService);
+            pageScrollView.Construct(pageScrollPresenter);
 
             foreach (var pageConfig in _pageConfigs)
             {
                 _pageFactory.Create(
-                    _pageScrollView.Container,
-                    pageConfig);
-                _pageButtonFactory.Create(
-                    pageConfig.PageIndex,
-                    _view.ButtonGroup,
-                    _scrollService);
+                    pageScrollView.Container,
+                    pageConfig,
+                    _view.ButtonGroup);
             }
         }
 

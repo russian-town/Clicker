@@ -39,7 +39,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 10, y: 260.91}
-  m_SizeDelta: {x: 945.9934, y: 521.8249}
+  m_SizeDelta: {x: 945, y: 520}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1724624267869133874
 CanvasRenderer:
@@ -92,6 +92,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <CloseButton>k__BackingField: {fileID: 3363029497085827113}
+  _rectTransform: {fileID: 7752675696517578569}
+  _duration: 1
+  _descriptionText: {fileID: 473525801908099982}
 --- !u!1 &1813143976316050167
 GameObject:
   m_ObjectHideFlags: 0
@@ -361,7 +364,7 @@ GameObject:
   - component: {fileID: 4798853419855884210}
   - component: {fileID: 473525801908099982}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: DescriptionText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

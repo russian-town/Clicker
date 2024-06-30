@@ -4,6 +4,7 @@ using Source.Codebase.Controllers.Presenters.Pages;
 using Source.Codebase.Domain;
 using Source.Codebase.Domain.Configs;
 using Source.Codebase.Domain.Models;
+using Source.Codebase.Presentation;
 using Source.Codebase.Presentation.Pages;
 using Source.Codebase.Services.Abstract;
 using Source.Codebase.Services.UI;
@@ -14,83 +15,120 @@ namespace Source.Codebase.Services.Factories
     public class PageFactory
     {
         private readonly IStaticDataService _staticDataService;
-        private readonly PageService _pageService;
+        private readonly PageScrollService _scrollService;
         private readonly LevelFactory _levelFactory;
         private readonly ClickHandlerFactory _clickHandlerFactory;
         private readonly ItemScrollFactory _itemScrollFactory;
         private readonly PopUpWindowFactory _popUpWindowFactory;
         private readonly WalletFactory _walletFactory;
+        private readonly PopUpWindowConfig[] _popUpWindowConfigs;
 
         public PageFactory(
             IStaticDataService staticDataService,
-            PageService pageService,
+            PageScrollService scrollService,
             LevelFactory levelFactory,
             ClickHandlerFactory clickHandlerFactory,
             ItemScrollFactory itemScrollFactory,
             PopUpWindowFactory popUpWindowFactory,
-            WalletFactory walletFactory)
+            WalletFactory walletFactory,
+            PopUpWindowConfig[] popUpWindowConfigs)
         {
             _staticDataService = staticDataService;
-            _pageService = pageService;
+            _scrollService = scrollService;
             _levelFactory = levelFactory;
             _clickHandlerFactory = clickHandlerFactory;
             _itemScrollFactory = itemScrollFactory;
             _popUpWindowFactory = popUpWindowFactory;
             _walletFactory = walletFactory;
+            _popUpWindowConfigs = popUpWindowConfigs;
         }
 
-        public void Create(Transform parent, PageConfig config)
+        public void Create(
+            Transform parent,
+            PageConfig config,
+            Transform buttonGroup)
         {
             switch (config.PageIndex)
             {
                 case PageIndex.None:
                     throw new Exception("Page is None!");
                 case PageIndex.Home:
-                    CreateStartPage(config.PageIndex, parent);
+                    CreateStartPage(config, parent, buttonGroup);
                     break;
                 case PageIndex.Shop:
-                    CreateShopPage(config.PageIndex, parent);
+                    CreateShopPage(config, parent, buttonGroup);
                     break;
                 case PageIndex.News:
-                    CreateNewsPage(config.PageIndex, parent);
+                    CreateNewsPage(config, parent, buttonGroup);
                     break;
             }
         }
 
-        private void CreateStartPage(PageIndex index, Transform parent)
+        private void CreateStartPage(
+            PageConfig config,
+            Transform parent,
+            Transform buttonGroup)
         {
-            StartPage page = new();
+            PageButtonView pageButton =
+                GetPageButtonView(buttonGroup, config);
+            StartPage page = new(config);
             StartPageView template =
                 _staticDataService.GetViewTemplate<StartPageView>();
             StartPageView view = Object.Instantiate(template, parent);
-            _pageService.RegistrePage(index, view.transform);
+            view.SetButton(pageButton);
             StartPagePresenter presenter =
-                new(page, view, _levelFactory, _clickHandlerFactory);
+                new(page, view, _levelFactory, _clickHandlerFactory, _scrollService);
             view.Construct(presenter);
         }
 
-        private void CreateShopPage(PageIndex index, Transform parent)
+        private void CreateShopPage(
+            PageConfig config,
+            Transform parent,
+            Transform buttonGroup)
         {
-            ShopPage page = new();
+            PageButtonView pageButton =
+                GetPageButtonView(buttonGroup, config);
+            ShopPage page = new(config);
             ShopPageView template =
                 _staticDataService.GetViewTemplate<ShopPageView>();
             ShopPageView view = Object.Instantiate(template, parent);
-            _pageService.RegistrePage(index, view.transform);
+            view.SetButton(pageButton);
             ShopPagePresenter presenter =
-                new(page, view, _walletFactory, _itemScrollFactory);
+                new(page, view, _walletFactory, _itemScrollFactory, _scrollService);
             view.Construct(presenter);
         }
 
-        private void CreateNewsPage(PageIndex index, Transform parent)
+        private void CreateNewsPage(
+            PageConfig config,
+            Transform parent,
+            Transform buttonGroup)
         {
-            NewsPage page = new();
+            PageButtonView pageButton =
+                GetPageButtonView(buttonGroup, config);
+            NewsPage page = new(config);
             NewsPageView template =
                 _staticDataService.GetViewTemplate<NewsPageView>();
             NewsPageView view = Object.Instantiate(template, parent);
-            _pageService.RegistrePage(index, view.transform);
-            NewsPagePresenter presenter =
-                new(page, view, _popUpWindowFactory);
+            view.SetButton(pageButton);
+            NewsPagePresenter presenter = new(
+                page,
+                view,
+                _popUpWindowFactory,
+                _scrollService,
+                _popUpWindowConfigs);
             view.Construct(presenter);
+        }
+
+        private PageButtonView GetPageButtonView(
+            Transform buttonGroup,
+            PageConfig config)
+        {
+            PageButtonView template =
+                _staticDataService.GetViewTemplate<PageButtonView>();
+            PageButtonView view =
+                Object.Instantiate(template, buttonGroup);
+            view.SetIcon(config.ButtonIcon);
+            return view;
         }
     }
 }

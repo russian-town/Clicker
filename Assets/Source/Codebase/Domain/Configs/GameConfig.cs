@@ -24,5 +24,6 @@ namespace Source.Codebase.Domain.Configs
         [field: SerializeField] public ClickEffectConfig ClickEffectConfig { get; private set; }
         [field: SerializeField] public ItemConfig[] ItemConfigs { get; private set; }
         [field: SerializeField] public PageConfig[] PageConfigs { get; private set; }
+        [field: SerializeField] public PopUpWindowConfig[] PopUpWindowConfigs { get; private set; }
     }
 }

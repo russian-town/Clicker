@@ -1,4 +1,3 @@
-using Source.Codebase;
 using Source.Codebase.Domain.Configs;
 using Source.Codebase.Infrastructure;
 using Source.Codebase.Infrastructure.Pool;
@@ -27,9 +26,8 @@ public class GameLifetimeScope : LifetimeScope
         builder.Register<LevelFactory>(Lifetime.Singleton);
         builder.Register<ItemFactory>(Lifetime.Singleton);
         builder.Register<HUDFactory>(Lifetime.Singleton);
-        builder.Register<PageService>(Lifetime.Singleton);
         builder.Register<PageFactory>(Lifetime.Singleton);
-        builder.Register<PageButtonFactory>(Lifetime.Singleton);
+        builder.Register<PageScrollService>(Lifetime.Singleton);
         builder.Register<PopUpWindowFactory>(Lifetime.Singleton);
         builder.Register<ItemScrollFactory>(Lifetime.Singleton);
         builder.Register<WalletFactory>(Lifetime.Singleton);
@@ -43,6 +41,7 @@ public class GameLifetimeScope : LifetimeScope
         builder.RegisterInstance(_gameConfig.ClickEffectConfig);
         builder.RegisterInstance(_gameConfig.PageConfigs);
         builder.RegisterInstance(_gameConfig.ItemConfigs);
+        builder.RegisterInstance(_gameConfig.PopUpWindowConfigs);
     }
 
     private void RegisterCamera(IContainerBuilder builder)

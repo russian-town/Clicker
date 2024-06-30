@@ -10,12 +10,12 @@ namespace Source.Codebase.Controllers.Presenters
     {
         private readonly PageScroll _scroll;
         private readonly PageScrollView _view;
-        private readonly ScrollService _scrollService;
+        private readonly PageScrollService _scrollService;
 
         public PageScrollPresenter(
             PageScroll scroll,
             PageScrollView view,
-            ScrollService scrollService)
+            PageScrollService scrollService)
         {
             _scroll = scroll;
             _view = view;

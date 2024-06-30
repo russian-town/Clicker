@@ -35,6 +35,7 @@ namespace Source.Codebase.Controllers.Presenters
         public void Enable()
         {
             _view.SellButton.onClick.AddListener(OnSellButtonClicked);
+            _item.DataReaded += OnDataReaded;
             _item.Bought += OnBought;
             UpdateView();
             string clickForceText = $"+ {_config.ClickForce}";
@@ -46,7 +47,11 @@ namespace Source.Codebase.Controllers.Presenters
         }
 
         public void Disable()
-            => _view.SellButton.onClick.RemoveListener(OnSellButtonClicked);
+        {
+            _view.SellButton.onClick.RemoveListener(OnSellButtonClicked);
+            _item.DataReaded -= OnDataReaded;
+            _item.Bought -= OnBought;
+        } 
 
         private void UpdateView()
         {
@@ -64,7 +69,10 @@ namespace Source.Codebase.Controllers.Presenters
                 _gameLoopService.UpdateClickForce(_config.ClickForce);
                 UpdateView();
             }
-        } 
+        }
+
+        private void OnDataReaded()
+            => UpdateView();
 
         private void OnBought()
             => _progressService.Save();

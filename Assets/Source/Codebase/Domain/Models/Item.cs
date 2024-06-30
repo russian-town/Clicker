@@ -18,6 +18,7 @@ namespace Source.Codebase.Domain.Models
         public bool IsBought { get; private set; }
 
         public event Action Bought;
+        public event Action DataReaded;
 
         public void By()
         {
@@ -35,6 +36,7 @@ namespace Source.Codebase.Domain.Models
                 if (itemData.ClickType == ClickType)
                 {
                     IsBought = itemData.IsBought;
+                    DataReaded?.Invoke();
                     break;
                 }
             }

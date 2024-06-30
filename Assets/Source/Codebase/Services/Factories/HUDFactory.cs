@@ -3,6 +3,7 @@ using Source.Codebase.Domain.Configs;
 using Source.Codebase.Domain.Models;
 using Source.Codebase.Presentation;
 using Source.Codebase.Services.Abstract;
+using Source.Codebase.Services.UI;
 using UnityEngine;
 
 namespace Source.Codebase.Services.Factories
@@ -12,20 +13,20 @@ namespace Source.Codebase.Services.Factories
         private readonly IStaticDataService _staticDataService;
         private readonly PageConfig[] _pageConfigs;
         private readonly PageFactory _pageFactory;
-        private readonly PageButtonFactory _pageButtonFactory;
+        private readonly PageScrollService _pageScrollService;
         private readonly Camera _camera;
 
         public HUDFactory(
             IStaticDataService staticDataService,
             PageConfig[] pageConfigs,
             PageFactory pageFactory,
-            PageButtonFactory pageButtonFactory,
+            PageScrollService pageScrollService,
             Camera camera)
         {
             _staticDataService = staticDataService;
             _pageConfigs = pageConfigs;
             _pageFactory = pageFactory;
-            _pageButtonFactory = pageButtonFactory;
+            _pageScrollService = pageScrollService;
             _camera = camera;
         }
 
@@ -41,7 +42,7 @@ namespace Source.Codebase.Services.Factories
                 _staticDataService,
                 _pageConfigs,
                 _pageFactory,
-                _pageButtonFactory,
+                _pageScrollService,
                 _camera);
             view.Construct(presenter);
         }
