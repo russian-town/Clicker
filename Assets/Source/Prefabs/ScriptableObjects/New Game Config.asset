@@ -36,4 +36,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4de381dea16f54f40b9a87abc59e17ac, type: 2}
   - {fileID: 11400000, guid: 6da8ccac4fc04f24996ff27130a895d3, type: 2}
   - {fileID: 11400000, guid: 22814c1fa6cbb3646b12fac6f75d7a4c, type: 2}
-  <PopUpWindowConfigs>k__BackingField: []
+  <PopUpWindowConfigs>k__BackingField:
+  - {fileID: 11400000, guid: 08a082f4e739f9c4f8ef85cde44c6a40, type: 2}
+  - {fileID: 11400000, guid: 950d79a1ffac9e148bf92dfea0543107, type: 2}
+  - {fileID: 11400000, guid: 52f928f3764c2b249bd3691bb1a35408, type: 2}
+  - {fileID: 11400000, guid: 25a2735e48a2aa842aa85b0e76dc703e, type: 2}

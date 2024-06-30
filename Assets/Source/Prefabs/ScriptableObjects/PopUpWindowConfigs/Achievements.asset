@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5043dbf0fd6244b458bd63a10bbfc0a0, type: 3}
   m_Name: Achievements
   m_EditorClassIdentifier: 
-  <Description>k__BackingField: 
+  _description: You have received a new achievement!
