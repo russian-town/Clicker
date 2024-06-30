@@ -34,15 +34,20 @@ namespace Source.Codebase.Controllers.Presenters
 
         public void Enable()
         {
+            _clickHandler.DataReaded += OnDataReaded;
             _view.Clicked += OnClicked;
             _gameLoopService.ClickForceUpdated += OnClickForceUpdated;
         }
 
         public void Disable()
         {
+            _clickHandler.DataReaded -= OnDataReaded;
             _view.Clicked -= OnClicked;
             _gameLoopService.ClickForceUpdated -= OnClickForceUpdated;
         }
+
+        private void OnDataReaded(int clickForce)
+            => _gameLoopService.UpdateClickForce(clickForce);
 
         private void OnClickForceUpdated(int clickForce)
         {

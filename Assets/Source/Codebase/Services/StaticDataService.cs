@@ -4,6 +4,7 @@ using System.Linq;
 using Source.Codebase.Domain;
 using Source.Codebase.Domain.Configs;
 using Source.Codebase.Presentation;
+using Source.Codebase.Presentation.Pages;
 using Source.Codebase.Services.Abstract;
 using UnityEngine;
 
@@ -15,30 +16,31 @@ namespace Source.Codebase.Services
 
         private Dictionary<ClickType, ItemConfig> _itemConfigByClickType;
         private Dictionary<PageIndex, PageConfig> _pageConfigByIndex;
-        private Dictionary<ScrollType, ScrollConfig> _scrollConfigByType;
 
         public StaticDataService()
         {
             _viewTemplateByType = new();
             _itemConfigByClickType = new();
-            _scrollConfigByType = new();
         }
 
         public void LoadGameConfig(GameConfig gameConfig)
         {
             LoadItemConfigs(gameConfig.ItemConfigs);
             LoadPageConfigs(gameConfig.PageConfigs);
-            LoadScrollConfigs(gameConfig.ScrollConfigs);
             _viewTemplateByType.Clear();
             _viewTemplateByType.Add(typeof(LevelView), gameConfig.LevelViewTemplate);
             _viewTemplateByType.Add(typeof(ClickHandlerView), gameConfig.ClickHandlerViewTemplate);
             _viewTemplateByType.Add(typeof(ClickEffectView), gameConfig.ClickEffectViewTemplate);
             _viewTemplateByType.Add(typeof(ItemView), gameConfig.ItemViewTemplate);
-            _viewTemplateByType.Add(typeof(PageView), gameConfig.PageViewTemplate);
             _viewTemplateByType.Add(typeof(PageButtonView), gameConfig.PageButtonViewTemplate);
             _viewTemplateByType.Add(typeof(HUDView), gameConfig.HUDViewTemplate);
             _viewTemplateByType.Add(typeof(WalletView), gameConfig.WalletViewTemplate);
             _viewTemplateByType.Add(typeof(PopUpWindowView), gameConfig.PopUpWindowViewTemplate);
+            _viewTemplateByType.Add(typeof(PageScrollView), gameConfig.PageScrollViewTemplate);
+            _viewTemplateByType.Add(typeof(StartPageView), gameConfig.StartPageViewTemplate);
+            _viewTemplateByType.Add(typeof(ShopPageView), gameConfig.ShopPageViewTemplate);
+            _viewTemplateByType.Add(typeof(NewsPageView), gameConfig.NewsPageViewTemplate);
+            _viewTemplateByType.Add(typeof(ItemSctollView), gameConfig.ItemSctollViewTemplate);
         }
 
         public T GetViewTemplate<T>() where T : MonoBehaviour
@@ -65,14 +67,6 @@ namespace Source.Codebase.Services
             return _pageConfigByIndex[pageIndex];
         }
 
-        public ScrollConfig GetScrollConfig(ScrollType scrollType)
-        {
-            if (_scrollConfigByType.ContainsKey(scrollType) == false)
-                throw new Exception($"ScrollConfig for ScrollType {scrollType} does not exist!");
-
-            return _scrollConfigByType[scrollType];
-        }
-
         private void LoadItemConfigs(ItemConfig[] itemConfigs)
         {
             if (itemConfigs.Length != itemConfigs.Distinct().Count())
@@ -93,17 +87,6 @@ namespace Source.Codebase.Services
                 pageConfigs.ToDictionary(
                     pageConfigs => pageConfigs.PageIndex,
                     pageConfigs => pageConfigs);
-        }
-
-        private void LoadScrollConfigs(ScrollConfig[] scrollConfigs)
-        {
-            if (scrollConfigs.Length != scrollConfigs.Distinct().Count())
-                throw new Exception("All scroll configs must be distinct");
-
-            _scrollConfigByType =
-                scrollConfigs.ToDictionary(
-                    scrollConfigs => scrollConfigs.ScrollType,
-                    scrollConfigs => scrollConfigs);
         }
     }
 }

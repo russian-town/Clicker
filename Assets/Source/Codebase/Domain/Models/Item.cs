@@ -5,7 +5,7 @@ using Source.Codebase.Domain.Configs;
 
 namespace Source.Codebase.Domain.Models
 {
-    public class Item : IDataWriter
+    public class Item : IDataReader, IDataWriter
     {
         public Item(ItemConfig configs)
         {
@@ -19,9 +19,6 @@ namespace Source.Codebase.Domain.Models
 
         public event Action Bought;
 
-        public void ApplyData(ItemData itemData)
-            => IsBought = itemData.IsBought;
-
         public void By()
         {
             if (IsBought == true)
@@ -29,6 +26,18 @@ namespace Source.Codebase.Domain.Models
 
             IsBought = true;
             Bought?.Invoke();
+        }
+
+        public void Read(PlayerData playerData)
+        {
+            foreach (var itemData in playerData.ItemsData)
+            {
+                if (itemData.ClickType == ClickType)
+                {
+                    IsBought = itemData.IsBought;
+                    break;
+                }
+            }
         }
 
         public void Write(PlayerData playerData)

@@ -1,9 +1,7 @@
 using Source.Codebase.Controllers.Presenters.Abstract;
-using Source.Codebase.Domain;
 using Source.Codebase.Domain.Configs;
 using Source.Codebase.Domain.Models;
 using Source.Codebase.Presentation;
-using Source.Codebase.Services;
 using Source.Codebase.Services.Abstract;
 using Source.Codebase.Services.Factories;
 using Source.Codebase.Services.UI;
@@ -20,6 +18,8 @@ namespace Source.Codebase.Controllers.Presenters
         private readonly PageFactory _pageFactory;
         private readonly PageButtonFactory _pageButtonFactory;
         private readonly ScrollService _scrollService;
+
+        private PageScrollView _pageScrollView;
 
         public HUDPresenter(
             HUD hud,
@@ -42,17 +42,19 @@ namespace Source.Codebase.Controllers.Presenters
 
         public void Enable()
         {
-            ScrollConfig scrollConfig =
-                _staticDataService.GetScrollConfig(ScrollType.Page);
-            Scroll scroll = new(scrollConfig);
-            ScrollView scrollView =
-                Object.Instantiate(scrollConfig.ScrollViewTemplate, _view.transform);
-            ScrollPresenter scrollPresenter = new(scroll, scrollView, _scrollService);
-            scrollView.Construct(scrollPresenter);
+            PageScroll pageScroll = new();
+            PageScrollView template =
+                _staticDataService.GetViewTemplate<PageScrollView>();
+            _pageScrollView = Object.Instantiate(template, _view.transform);
+            PageScrollPresenter pageScrollPresenter =
+                new(pageScroll, _pageScrollView, _scrollService);
+            _pageScrollView.Construct(pageScrollPresenter);
 
             foreach (var pageConfig in _pageConfigs)
             {
-                _pageFactory.Create(pageConfig.PageIndex, scrollView.Container);
+                _pageFactory.Create(
+                    _pageScrollView.Container,
+                    pageConfig);
                 _pageButtonFactory.Create(
                     pageConfig.PageIndex,
                     _view.ButtonGroup,
@@ -60,8 +62,6 @@ namespace Source.Codebase.Controllers.Presenters
             }
         }
 
-        public void Disable()
-        {
-        }
+        public void Disable() { }
     }
 }

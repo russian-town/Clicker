@@ -30,7 +30,6 @@ namespace Source.Codebase.Controllers.Presenters
 
         public void Enable()
         {
-            OnBalanceChanged(_wallet.Balance);
             _wallet.BalanceChanged += OnBalanceChanged;
             _gameLoopService.Clicked += OnClicked;
             _shopService.Selled += OnSelled;

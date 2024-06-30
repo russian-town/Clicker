@@ -15,22 +15,21 @@ MonoBehaviour:
   <ClickEffectViewTemplate>k__BackingField: {fileID: -5363537147569363605, guid: aa273053f582d4f48834ecd26b8bfddc, type: 3}
   <LevelViewTemplate>k__BackingField: {fileID: 6404904165419324414, guid: 9d9c645e03d348a418588f0f7bd0105c, type: 3}
   <ClickHandlerViewTemplate>k__BackingField: {fileID: 1453160947339866136, guid: 7cca2fcc8117e4849960f337bc904157, type: 3}
-  <PageViewTemplate>k__BackingField: {fileID: -6138638317795249438, guid: 0843f5545d76cbb41bb302aeaf292b39, type: 3}
+  <PageViewTemplate>k__BackingField: {fileID: 0}
   <PageButtonViewTemplate>k__BackingField: {fileID: 3770704286140892784, guid: a7c446ee1c7609547a71e49d6ace00f9, type: 3}
   <ItemViewTemplate>k__BackingField: {fileID: 4307901473570232528, guid: 95aedca04545edd45a310cd3eeede876, type: 3}
   <CanvasTemplate>k__BackingField: {fileID: 2123940457531588709, guid: 51010bdf015309e409f0f4e2c7fcd719, type: 3}
   <CameraTemplate>k__BackingField: {fileID: 2023816764358013359, guid: 1d08c2fcc247f784db6598a7c5489a20, type: 3}
   <HUDViewTemplate>k__BackingField: {fileID: 2420636553062796091, guid: 51010bdf015309e409f0f4e2c7fcd719, type: 3}
   <WalletViewTemplate>k__BackingField: {fileID: 1020327055510640254, guid: be965ec8f0cf463439483a5f58bf840a, type: 3}
+  <PopUpWindowViewTemplate>k__BackingField: {fileID: 4335918041471260069, guid: 1a42f867038e2c842a967ccc0542ba79, type: 3}
+  <PageScrollViewTemplate>k__BackingField: {fileID: 2125071492314011171, guid: 8e2e99377badbc8438ceb34b7da2f653, type: 3}
   <ClickEffectConfig>k__BackingField: {fileID: 11400000, guid: b68ecee260509184b8f6aa5d3a9dd525, type: 2}
   <ItemConfigs>k__BackingField:
   - {fileID: 11400000, guid: eaafbbcaf2251cc4c846db745e821f0d, type: 2}
   - {fileID: 11400000, guid: 7321f6b3a532fca49b780035d0378ba4, type: 2}
   - {fileID: 11400000, guid: abbf97c6568298d419f15baacf2c77c0, type: 2}
   - {fileID: 11400000, guid: 45285f8d6d7ce6748b83099e2ba95b66, type: 2}
-  <ScrollConfigs>k__BackingField:
-  - {fileID: 11400000, guid: db4a6a56ebcd0874b8e700d4d4465cf2, type: 2}
-  - {fileID: 11400000, guid: e26a96a672fba6c4095973ddee083dd1, type: 2}
   <PageConfigs>k__BackingField:
   - {fileID: 11400000, guid: 4de381dea16f54f40b9a87abc59e17ac, type: 2}
   - {fileID: 11400000, guid: 6da8ccac4fc04f24996ff27130a895d3, type: 2}

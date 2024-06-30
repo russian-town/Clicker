@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: MultiClick
   m_EditorClassIdentifier: 
   <Name>k__BackingField: Multi
-  <Price>k__BackingField: 80
+  <Price>k__BackingField: 500
   <ClickForce>k__BackingField: 5
   <Icon>k__BackingField: {fileID: 21300000, guid: d6bb89fc7af9c8e49905c8c31dddf23b, type: 3}
   <ClickType>k__BackingField: 3

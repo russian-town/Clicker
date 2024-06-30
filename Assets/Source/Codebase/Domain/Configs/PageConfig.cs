@@ -1,3 +1,4 @@
+using Source.Codebase.Presentation.Abstract;
 using UnityEngine;
 
 namespace Source.Codebase.Domain.Configs

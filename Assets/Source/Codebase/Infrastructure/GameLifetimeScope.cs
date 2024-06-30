@@ -25,14 +25,15 @@ public class GameLifetimeScope : LifetimeScope
         builder.Register<ClickHandlerFactory>(Lifetime.Singleton);
         builder.Register<ClickEffectFactory>(Lifetime.Singleton);
         builder.Register<LevelFactory>(Lifetime.Singleton);
-        builder.Register<SaveDataInjector>(Lifetime.Singleton);
         builder.Register<ItemFactory>(Lifetime.Singleton);
-        builder.Register<ItemViewFactory>(Lifetime.Singleton);
         builder.Register<HUDFactory>(Lifetime.Singleton);
         builder.Register<PageService>(Lifetime.Singleton);
         builder.Register<PageFactory>(Lifetime.Singleton);
         builder.Register<PageButtonFactory>(Lifetime.Singleton);
         builder.Register<PopUpWindowFactory>(Lifetime.Singleton);
+        builder.Register<ItemScrollFactory>(Lifetime.Singleton);
+        builder.Register<WalletFactory>(Lifetime.Singleton);
+        builder.Register<ShopService>(Lifetime.Singleton);
         builder.RegisterEntryPoint<EntryPoint>();
     }
 
@@ -41,6 +42,7 @@ public class GameLifetimeScope : LifetimeScope
         builder.RegisterInstance(_gameConfig);
         builder.RegisterInstance(_gameConfig.ClickEffectConfig);
         builder.RegisterInstance(_gameConfig.PageConfigs);
+        builder.RegisterInstance(_gameConfig.ItemConfigs);
     }
 
     private void RegisterCamera(IContainerBuilder builder)

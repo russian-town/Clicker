@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3344123161978319601}
   - component: {fileID: 4712558378128687105}
   - component: {fileID: 8931993413670948866}
-  - component: {fileID: 4177963745924667674}
+  - component: {fileID: 2125071492314011171}
   m_Layer: 5
   m_Name: PageScrollView
   m_TagString: Untagged
@@ -109,7 +109,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &4177963745924667674
+--- !u!114 &2125071492314011171
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -118,7 +118,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1654735664846623751}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc1f0b394be40694abb349ac627fd600, type: 3}
+  m_Script: {fileID: 11500000, guid: ae3d1c952d897ab42852120b76388d2e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   <Container>k__BackingField: {fileID: 9063299477312263019}

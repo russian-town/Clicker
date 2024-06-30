@@ -8,8 +8,13 @@ namespace Source.Codebase.Domain.Models
     {
         public int ClickForce { get; private set; } = 1;
 
+        public event Action<int> DataReaded;
+
         public void Read(PlayerData playerData)
-            => ClickForce = playerData.CurrentClickForce;
+        {
+            ClickForce = playerData.CurrentClickForce;
+            DataReaded?.Invoke(ClickForce);
+        } 
 
         public void Write(PlayerData playerData)
             => playerData.CurrentClickForce = ClickForce;

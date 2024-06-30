@@ -5,14 +5,11 @@ using Source.Codebase.Domain.Models.Abstract;
 
 namespace Source.Codebase.Domain
 {
-    public class Wallet : IWallet, IDataWriter
+    public class Wallet : IWallet, IDataReader, IDataWriter
     {
         public int Balance { get; private set; }
 
         public event Action<int> BalanceChanged;
-
-        public void ApplyData(WalletData data)
-            => Balance = data.Balance;
 
         public void IncreaseBalance(int value)
         {
@@ -34,6 +31,12 @@ namespace Source.Codebase.Domain
             Balance -= price;
             BalanceChanged?.Invoke(Balance);
         }
+
+        public void Read(PlayerData playerData)
+        {
+            Balance = playerData.WalletData.Balance;
+            BalanceChanged?.Invoke(Balance);
+        } 
 
         public void Write(PlayerData playerData)
             => playerData.WalletData.Balance = Balance;

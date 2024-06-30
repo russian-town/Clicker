@@ -30,7 +30,6 @@ namespace Source.Codebase.Controllers.Presenters
             _progressService = progressService;
             _gameLoopService = gameLoopService;
             _shopService = shopService;
-
         }
 
         public void Enable()

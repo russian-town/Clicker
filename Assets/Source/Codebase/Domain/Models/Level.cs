@@ -1,6 +1,6 @@
+using System;
 using Source.Codebase.Data;
 using Source.Codebase.Data.Abstract;
-using System;
 
 namespace Source.Codebase.Domain.Models
 {
